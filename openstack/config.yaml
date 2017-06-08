@@ -1,0 +1,7 @@
+- hosts: all
+- include: "ping.yaml"
+- include: "yum.yaml"
+- include: "systemd.yaml"
+- include: "etc_hosts.yaml"
+- include: "ssh_key.yaml"
+# - include: "packstack.yaml"

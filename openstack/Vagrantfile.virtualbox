@@ -1,0 +1,51 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagranfile to provide 3 boxes for Openstack deployment (controller, and 2 compute nodes)
+
+Vagrant.configure("2") do |config|
+  config.vm.synced_folder ".", "/vagrant"
+
+  config.vm.define "compute01" do |compute01|
+    compute01.vm.box = "centos/7"
+    compute01.vm.hostname = "compute01"
+    compute01.vm.network "private_network", ip: "192.168.33.11"
+    compute01.vm.network "private_network", ip: "192.168.133.11"
+    compute01.vm.provider "virtualbox" do |v|
+      v.name = "compute01"
+      v.cpus = 8
+      v.memory = 8192
+    end
+  end
+  
+  config.vm.define "compute02" do |compute02|
+    compute02.vm.box = "centos/7"
+    compute02.vm.hostname = "compute02"
+    compute02.vm.network "private_network", ip: "192.168.33.12"
+    compute02.vm.network "private_network", ip: "192.168.133.12"
+    compute02.vm.provider "virtualbox" do |v|
+      v.name = "compute02"
+      v.cpus = 8
+      v.memory = 8192
+    end
+  end 
+  
+  config.vm.define "controller" do |controller|
+    controller.vm.box = "centos/7"
+    controller.vm.hostname = "controller"
+    controller.vm.network "private_network", ip: "192.168.33.10"
+    controller.vm.network "private_network", ip: "192.168.133.10"
+    controller.vm.provider "virtualbox" do |v|
+      v.name = "controller"
+      v.cpus = 8
+      v.memory = 8192
+    end 
+    controller.vm.provision :ansible_local do |ansible|
+      ansible.playbook       = "config.yaml"
+      # ansible.verbose        = true
+      ansible.install        = true
+      ansible.limit          = "all" # or only "nodes" group, etc.
+      ansible.inventory_path = "hosts"
+    end
+  end
+end

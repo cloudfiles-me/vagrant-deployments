@@ -1,0 +1,9 @@
+- hosts: all
+  tasks:
+    - name: stop & disable NetworkManager in all nodes
+      systemd:
+        state: stopped
+        name: NetworkManager
+        enabled: no
+      become: yes
+      become_user: root

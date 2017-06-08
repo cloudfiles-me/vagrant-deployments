@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+    - name: Install aptitude
+      apt:
+          name: aptitude
+          #state: present
+          state: absent
+      become: true
