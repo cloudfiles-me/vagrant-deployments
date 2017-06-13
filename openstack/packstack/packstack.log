@@ -1,0 +1,33 @@
+Welcome to the Packstack setup utility
+
+The installation log file is available at: /var/tmp/packstack/20170609-215718-0qh0DG/openstack-setup.log
+
+Installing:
+Clean Up                                             [ [32mDONE[0m ]
+Discovering ip protocol version                      [ [32mDONE[0m ]
+Setting up ssh keys                                  [ [32mDONE[0m ]
+Preparing servers                                    [ [32mDONE[0m ]
+Pre installing Puppet and discovering hosts' details [ [32mDONE[0m ]
+Preparing pre-install entries                        [ [32mDONE[0m ]
+Installing time synchronization via NTP              [ [32mDONE[0m ]
+Setting up CACERT                                    [ [32mDONE[0m ]
+Preparing AMQP entries                               [ [32mDONE[0m ]
+Preparing MariaDB entries                            [ [32mDONE[0m ]
+Fixing Keystone LDAP config parameters to be undef if empty[ [32mDONE[0m ]
+Preparing Keystone entries                           [ [32mDONE[0m ]
+Preparing Glance entries                             [ [32mDONE[0m ]
+Checking if the Cinder server has a cinder-volumes vg[ [32mDONE[0m ]
+Preparing Cinder entries                             [ [32mDONE[0m ]
+Preparing Nova API entries                           [ [32mDONE[0m ]
+Creating ssh keys for Nova migration                 [ [32mDONE[0m ]
+Gathering ssh host keys for Nova migration           [ [32mDONE[0m ]
+Preparing Nova Compute entries                       [ [32mDONE[0m ]
+Preparing Nova Scheduler entries                     [ [32mDONE[0m ]
+Preparing Nova VNC Proxy entries                     [ [32mDONE[0m ]
+Preparing OpenStack Network-related Nova entries     [ [32mDONE[0m ]
+Preparing Nova Common entries                        [ [32mDONE[0m ]
+Preparing Neutron LBaaS Agent entries                [ [32mDONE[0m ]
+Preparing Neutron API entries                     [ [0;31mERROR[0m ]
+
+[0;31mERROR : "Couldn't detect ipaddress of interface eth2 on node openstack"[0m
+Please check log file /var/tmp/packstack/20170609-215718-0qh0DG/openstack-setup.log for more information

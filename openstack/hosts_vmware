@@ -1,0 +1,6 @@
+[controllers]
+controller  ansible_connection=local ansible_host=192.168.3.10  ansible_ssh_private_key_file=/vagrant/.vagrant/machines/controller/vmware_fusion/private_key
+
+[compute_nodes]
+compute01  ansible_connection=ssh ansible_host=192.168.3.11  ansible_ssh_private_key_file=/vagrant/.vagrant/machines/compute01/vmware_fusion/private_key
+compute02  ansible_connection=ssh ansible_host=192.168.3.12  ansible_ssh_private_key_file=/vagrant/.vagrant/machines/compute02/vmware_fusion/private_key

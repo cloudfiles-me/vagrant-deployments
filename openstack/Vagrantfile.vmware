@@ -1,0 +1,53 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagranfile to provide 3 boxes for Openstack deployment (controller, and 2 compute nodes)
+# Create 2 host only network, and use IP address from the auto generated subnet to replace 
+# the existing one
+
+Vagrant.configure("2") do |config|
+  config.vm.synced_folder ".", "/vagrant"
+
+  config.vm.define "compute01" do |compute01|
+    compute01.vm.box = "bento/centos-7.3"
+    compute01.vm.hostname = "compute01"
+    compute01.vm.network "private_network", ip: "192.168.3.11"
+    compute01.vm.network "private_network", ip: "192.168.80.11"
+    compute01.vm.provider "vmware_fusion" do |v|
+      v.vmx["memsize"] = "8192"
+      v.vmx["numvcpus"] = "8"
+      v.vmx["vhv.enable"] = "TRUE"
+    end
+  end
+  
+  config.vm.define "compute02" do |compute02|
+    compute02.vm.box = "bento/centos-7.3"
+    compute02.vm.hostname = "compute02"
+    compute02.vm.network "private_network", ip: "192.168.3.12"
+    compute02.vm.network "private_network", ip: "192.168.80.12"
+    compute02.vm.provider "vmware_fusion" do |v|
+      v.vmx["memsize"] = "8192"
+      v.vmx["numvcpus"] = "8"
+      v.vmx["vhv.enable"] = "TRUE"
+    end
+  end 
+  
+  config.vm.define "controller" do |controller|
+    controller.vm.box = "bento/centos-7.3"
+    controller.vm.hostname = "controller"
+    controller.vm.network "private_network", ip: "192.168.3.10"
+    controller.vm.network "private_network", ip: "192.168.80.10"
+    controller.vm.provider "vmware_fusion" do |v|
+      v.vmx["memsize"] = "8192"
+      v.vmx["numvcpus"] = "8"
+      v.vmx["vhv.enable"] = "TRUE"
+    end
+    controller.vm.provision :ansible_local do |ansible|
+      ansible.playbook       = "config.yaml"
+      # ansible.verbose        = true
+      ansible.install        = true
+      ansible.limit          = "all" # or only "nodes" group, etc.
+      ansible.inventory_path = "hosts_vmware"
+    end
+  end
+end

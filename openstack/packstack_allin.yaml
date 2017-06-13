@@ -1,7 +1,7 @@
 - hosts: controller
   tasks:
     - name: run packstack with pre created answer file
-      command: /bin/sh /vagrant/packstack/execute_packstack.sh -d
+      command: /bin/sh /vagrant/packstack/execute_packstack.sh -a
       register: output
       become: true
       become_user: root

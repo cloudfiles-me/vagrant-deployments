@@ -1,0 +1,15 @@
+- hosts: controller
+  tasks:
+    - name: Install centos-release-openstack-ocata
+      yum:
+        name: centos-release-openstack-ocata
+        state: present
+      become: true
+
+- hosts: controller
+  tasks:
+    - name: Install packstack
+      yum:
+        name: openstack-packstack
+        state: present
+      become: true
